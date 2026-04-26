@@ -76,7 +76,7 @@ app.post('/api/verify-payment', (req, res) => {
     res.status(400).json({ status: "failure" });
   }
 });
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("✅ MongoDB Connected"))
   .catch(err => console.log("❌ MongoDB Connection Error:", err));
 

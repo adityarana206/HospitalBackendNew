@@ -20,8 +20,15 @@ const seedAll = async () => {
   console.log("Connected to MongoDB:", DB_NAME);
 
   try {
-    await mongoose.connection.dropDatabase();
-    console.log("Dropped existing database.");
+    await Promise.all([
+      Doctor.deleteMany({}),
+      User.deleteMany({}),
+      Service.deleteMany({}),
+      ServiceBooking.deleteMany({}),
+      Appointment.deleteMany({}),
+      Message.deleteMany({}),
+    ]);
+    console.log("Cleared existing collections.");
 
     // ── Users ────────────────────────────────────────────────────────────────
     const users = await User.insertMany([
