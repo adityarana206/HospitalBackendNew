@@ -6,6 +6,8 @@ import fileUpload from "express-fileupload";
 import { dbConnection } from "./database/dbConnection.js";
 import messageRouter from "./routes/messageRouter.js";
 import userRouter from "./routes/userRoutes.js";
+import adminRouter from "./routes/adminRouter.js";
+import { updateAppointmentStatus, deleteDoctor } from "./controllers/adminController.js";
 import { errorMiddleware } from "./middlewares/errorMiddleware.js";
 
 const app = express();
@@ -26,6 +28,9 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/v1/message", messageRouter);
 app.use("/api/v1/user", userRouter);
+app.use("/api/admin", adminRouter);
+app.put("/api/appointments/:id", updateAppointmentStatus);
+app.delete("/api/doctors/:id", deleteDoctor);
 app.use(
   fileUpload({
     useTempFiles: true,
